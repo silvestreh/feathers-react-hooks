@@ -1,5 +1,3 @@
-/// <reference path="react.d.ts" />
-
 interface FResponse {
   data: object[];
   total: number;
