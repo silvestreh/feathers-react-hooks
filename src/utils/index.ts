@@ -1,7 +1,7 @@
 import omit from 'lodash.omit';
 import sift from 'sift';
 
-export const isRecordInData = (record: object, list: object[], idField: string) => {
+export const isRecordInData = (record: object, list: object[], idField: string): isInData => {
   const index: number = list.findIndex((r: object) => r[idField] === record[idField]);
   const isInData: boolean = index >= 0;
   return { index, isInData };
@@ -30,7 +30,7 @@ export const allowedOperators = [
   '$elemMatch'
 ];
 
-export const handleCreate = (created: object, result: FResponse, query: object, idField: string, handleChange: Function) => {
+export const handleCreate = (created: object, result: FResponse, query: object, idField: string, handleChange: Function): void => {
   const { data } = result;
   const shouldUpdateData = isRecordInData(created, data, idField);
   const keys = Object.keys(query)
@@ -54,7 +54,7 @@ export const handleCreate = (created: object, result: FResponse, query: object, 
   });
 };
 
-export const handlePatch = (updated: object, result: FResponse, idField: string, handleChange: Function) => {
+export const handlePatch = (updated: object, result: FResponse, idField: string, handleChange: Function): void => {
   const { data } = result;
   const shouldUpdateData = isRecordInData(updated, data, idField);
 
@@ -67,7 +67,7 @@ export const handlePatch = (updated: object, result: FResponse, idField: string,
   }
 };
 
-export const handleRemove = async (removed: object, result: FResponse, idField: string, handleChange: Function) => {
+export const handleRemove = async (removed: object, result: FResponse, idField: string, handleChange: Function): Promise<void> => {
   const { data } = result;
   const count =  data.length;
   const shouldUpdateData = isRecordInData(removed, data, idField);

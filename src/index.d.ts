@@ -19,3 +19,7 @@ interface FService {
   update: Function;
 }
 
+interface isInData {
+  isInData: boolean;
+  index: number;
+}
