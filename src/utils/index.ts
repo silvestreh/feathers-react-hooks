@@ -31,10 +31,10 @@ export const allowedOperators = [
 ];
 
 export const handleCreate = (created: object, result: FResponse, query: object, idField: string, handleChange: Function): void => {
-  const { data } = result;
-  const shouldUpdateData = isRecordInData(created, data, idField);
+  const data: object[] = result.data;
+  const shouldUpdateData: isInData = isRecordInData(created, data, idField);
   const keys = Object.keys(query)
-    .filter(key => (
+    .filter((key: string) => (
       key.includes('$') && !allowedOperators.includes(key)
     ));
   //@ts-ignore
@@ -55,8 +55,8 @@ export const handleCreate = (created: object, result: FResponse, query: object, 
 };
 
 export const handlePatch = (updated: object, result: FResponse, idField: string, handleChange: Function): void => {
-  const { data } = result;
-  const shouldUpdateData = isRecordInData(updated, data, idField);
+  const data: object[] = result.data;
+  const shouldUpdateData: isInData = isRecordInData(updated, data, idField);
 
   if (shouldUpdateData.isInData) {
     data[shouldUpdateData.index] = updated;
@@ -68,9 +68,9 @@ export const handlePatch = (updated: object, result: FResponse, idField: string,
 };
 
 export const handleRemove = async (removed: object, result: FResponse, idField: string, handleChange: Function): Promise<void> => {
-  const { data } = result;
-  const count =  data.length;
-  const shouldUpdateData = isRecordInData(removed, data, idField);
+  const data: object[] = result.data;
+  const count: number =  data.length;
+  const shouldUpdateData: isInData = isRecordInData(removed, data, idField);
 
   if (shouldUpdateData.isInData) {
     const updatedData: object[] = [];
